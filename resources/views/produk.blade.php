@@ -48,13 +48,17 @@
               <td> {{"Rp".number_format($data->harga )}} </td>
               <td> {{ $data->updated_at }} </td>
               <td>
-                <a href="#">
+                <a href="/produk/{{ $data->id }}/edit"  type="button">
                   <i class="fa fa-edit blue"></i>
                 </a>
                 /
-                <a href="#">
-                  <i class="fa fa-trash red"></i>
-                </a>
+                <form action="{{ route('produk.destroy', $data->id) }}" method="POST" onclick="return confirm('Hapus data?')">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="form-submit-button">
+                        <i class="fa fa-trash red"></i>
+                    </button>
+                </form>
               </td>
             </tr>
             @endforeach
@@ -72,7 +76,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
+  
           <form method="POST" action="{{ route('produk.store') }}" role="form" enctype="multipart/form-data">
             @csrf  
             <div class="modal-body">
@@ -94,11 +98,10 @@
                   <div class="form-group">
                     <label>Kategori</label>
                     <select class="form-control" name="category_id">
-                      <option value="1">option 1</option>
-                      <option value="1">option 2</option>
-                      <option value="1">option 3</option>
-                      <option value="1">option 4</option>
-                      <option value="1">option 5</option>
+                      <option value="1">Bunga</option>
+                      <option value="1">Tanaman Hias</option>
+                      <option value="1">Peralatan</option>
+                      <option value="1">Lain-lain</option>
                     </select>
                   </div>
                 </div>

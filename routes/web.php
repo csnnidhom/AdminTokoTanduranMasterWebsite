@@ -22,5 +22,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/user', 'App\Http\Controllers\UserController');
 Route::resource('/produk', 'App\Http\Controllers\ProdukController');
+// Route::get('/produk/{data}/edit', 'ProdukController@edit');      //menangkap data
+// Route::patch('/produk/{data}', 'ProdukController@update');       //mengubah data
+// Route::delete('/produk/{data}/delete', [App\Http\Controllers\ProdukController::class, 'destroy']);  //menghapus data
 
 

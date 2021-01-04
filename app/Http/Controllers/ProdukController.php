@@ -70,9 +70,9 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produk $produk)
     {
-        //
+        return view('produk-edit', ['produk'=> $produk]);
     }
 
     /**
@@ -82,9 +82,15 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Produk $produk)
     {
-        //
+        Produk::where('id', $produk->id)->update([
+            'name'=>$request->name,
+            'harga'=>$request->harga,
+            'deskripsi'=>$request->deskripsi,
+            'category_id'=>$request->category_id
+        ]);
+        return redirect('/produk')->with('status','Data berhasil diubah!');
     }
 
     /**
@@ -93,8 +99,15 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        Produk::destroy($produk->id);
+        return redirect('/produk')->with('status', 'Data produk berhasil dihapus!');
     }
+
+    // public function delete(Produk $produk)
+    // {
+    //     Produk::destroy($produk->id);
+    //     return redirect('/produk')->with('status', 'Data produk berhasil dihapus!');
+    // }
 }
